@@ -21,10 +21,10 @@ function getProjects() {
 function getProjectById(id) {
   return db("projects")
     .where({ id })
-    .first();
-  // .then(project => {
-  //   return { ...project, completed: Boolean(project.completed) };
-  // });
+    .first()
+    .then(project => {
+      return { ...project, completed: Boolean(project.completed) };
+    });
 }
 
 function addProject(project) {
