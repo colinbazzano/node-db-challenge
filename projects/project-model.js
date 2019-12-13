@@ -6,17 +6,25 @@ module.exports = {
   getTasks,
   getProjectById,
   addProject,
-  addResource
+  addResource,
+  addTask
 };
 
 function getProjects() {
-  return db("projects");
+  return db("projects").then(projects => {
+    return projects.map(project => {
+      return { ...project, completed: Boolean(project.completed) };
+    });
+  });
 }
 
 function getProjectById(id) {
   return db("projects")
     .where({ id })
     .first();
+  // .then(project => {
+  //   return { ...project, completed: Boolean(project.completed) };
+  // });
 }
 
 function addProject(project) {
@@ -35,7 +43,7 @@ function addResource(resource) {
     .then(ids => ({ id: ids[0] }));
 }
 
-function getTasks() {
+function getTasks(id) {
   return db("tasks as t")
     .join("projects as p", "t.project_id", "p.id")
     .select(
@@ -44,5 +52,17 @@ function getTasks() {
       "t.description",
       "t.notes",
       "t.completed"
-    );
+    )
+    .where({ project_id: id })
+    .then(tasks => {
+      return tasks.map(task => {
+        return { ...task, completed: Boolean(task.completed) };
+      });
+    });
+}
+
+function addTask(id, task) {
+  return db("tasks")
+    .insert({ ...task, project_id: id })
+    .then(ids => ({ id: ids[0] }));
 }
