@@ -40,11 +40,19 @@ Demonstrate your understanding of this week's concepts by answering the followin
 
 - [ ] Explain the difference between `Relational Databases` and `SQL`.
 
+SQL (Structured Query Language) is a language, used when dealing with databases and database management. Relational Databases are ways to manage data from multiple tables and are done with RDMS (relational database management systems).
+
 - [ ] Why do tables need a `primary key`?
+
+The primary key serves as an autoincrementing id for each specific entry to a database table.
 
 - [ ] What is the name given to a table column that references the primary key on another table.
 
+That would be the Foreign Key.
+
 - [ ] What do we need in order to have a _many to many_ relationship between two tables.
+
+It's gone by quite a few different names, but I find `intermediate table` as the best way to describe it. It is a table often referring to the two tables that are trying to communicate and passes along the primary key as a foreign key to the intermediate table to give context between the tables.
 
 ## Minimum Viable Product
 
