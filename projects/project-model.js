@@ -5,7 +5,8 @@ module.exports = {
   getResources,
   getTasks,
   getProjectById,
-  addProject
+  addProject,
+  addResource
 };
 
 function getProjects() {
@@ -26,6 +27,12 @@ function addProject(project) {
 
 function getResources() {
   return db("resources");
+}
+
+function addResource(resource) {
+  return db("resources")
+    .insert(resource)
+    .then(ids => ({ id: ids[0] }));
 }
 
 function getTasks() {
